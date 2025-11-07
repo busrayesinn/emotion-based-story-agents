@@ -33,4 +33,4 @@ Elde edilecek sonuçlar, eğitim, oyun, psikoloji ve dijital içerik üretimi gi
 - **Rule-Based veya Random Mantık**
 - **GitHub** (Sürüm kontrolü ve işbirliği)
 
----
+----
