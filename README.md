@@ -21,6 +21,7 @@
 ## 📌 İçindekiler
 - [Proje Hakkında](#-proje-hakkında)
 - [Sistem Mimarisi](#-sistem-mimarisi)
+- [Kullanılan Ajanlar](#-kullanılan-ajanlar)
 - [Özellikler](#-özellikler)
 - [Ekran Görüntüleri](#-ekran-görüntüleri)
 - [Kurulum & Çalıştırma](#-kurulum--çalıştırma)
@@ -77,17 +78,21 @@ graph TD
     Spotify --> Output[Müzik & Mikro Aktivite Önerisi]
 ````
 
-### 🤖 Kullanılan Ajanlar
+---
 
-| Ajan                  | Görev                                                                   |
-| --------------------- | ----------------------------------------------------------------------- |
-| **EmotionAgent**      | Türkçe metin üzerinden duygu analizi (BERT + Rule-based + LLM).         |
-| **EventAgent**        | Günlük olayların kullanıcı üzerindeki etkisini analiz eder.             |
-| **MicroSignalAgent**  | Küçük geri bildirimleri (örn. açlık/tokluk) sayısal katkıya dönüştürür. |
-| **ContextAgent**      | Hava durumu ve zaman bilgisini bağlama ekler.                           |
-| **AffectVectorAgent** | Verileri 5 boyutlu duygu vektörüne (0–100) dönüştürür.                  |
-| **RegulationAgent**   | Mevcut durum ile hedef denge arasındaki farkı hesaplar.                 |
-| **SpotifyAgent**      | Regülasyon hedefine uygun müzik ve mikro aktivite önerir.               |
+## 🤖 Kullanılan Ajanlar
+
+| Ajan                  | Görev                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------------- |
+| **CoordinatorAgent**  | Tüm ajanların çalışmasını koordine eder, veri akışını yönetir ve nihai çıktıyı üretir. |
+| **EmotionAgent**      | Türkçe metin üzerinden duygu analizi (BERT + Rule-based + LLM).                        |
+| **EventAgent**        | Günlük olayların kullanıcı üzerindeki etkisini analiz eder.                            |
+| **MicroSignalAgent**  | Küçük geri bildirimleri (örn. açlık/tokluk) sayısal katkıya dönüştürür.                |
+| **ContextAgent**      | Zaman bilgisi ve genel bağlamı sisteme dahil eder.                                     |
+| **WeatherAgent**      | Hava durumu verilerini (WeatherAPI) alarak çevresel bağlama ekler.                     |
+| **AffectVectorAgent** | Verileri 5 boyutlu duygu vektörüne (0–100) dönüştürür.                                 |
+| **RegulationAgent**   | Mevcut durum ile hedef denge arasındaki farkı hesaplar.                                |
+| **SpotifyAgent**      | Regülasyon hedefine uygun müzik ve mikro aktivite önerir.                              |
 
 ---
 
@@ -183,8 +188,8 @@ mood2music/
 
 Bu proje ekip çalışması olarak geliştirilmiştir:
 
-- **[Melike Dal](https://github.com/melikedal)**
-- **[Büşra Yesin](https://github.com/busrayesinn)**
+* **[Melike Dal](https://github.com/melikedal)**
+* **[Büşra Yesin](https://github.com/busrayesinn)**
 
 ---
 
