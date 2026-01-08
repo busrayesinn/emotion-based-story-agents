@@ -1,4 +1,8 @@
 <div align="center">
+  <img src="screenshots/logo.png" alt="Mood-to-Music Logo" width="420"/>
+</div>
+
+<div align="center">
 
 # 🎧 Mood-to-Music  
 ### Duygu Farkındalıklı Müzik ve Regülasyon Asistanı
