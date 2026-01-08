@@ -56,27 +56,23 @@ Kullanıcının duygusal durumu şu vektörler üzerinden modellenir ve **0–10
 
 ## 🧠 Sistem Mimarisi
 
-Uygulama, merkezi bir **CoordinatorAgent** tarafından yönetilen, görevleri ayrıştırılmış çok ajanlı bir mimariye sahiptir.
+Uygulama, merkezi bir **CoordinatorAgent** tarafından yönetilen, görevleri net biçimde ayrıştırılmış **çok ajanlı (multi-agent)** bir mimariye sahiptir.
 
-```mermaid
-graph TD
-    User[Kullanıcı Girdisi] --> Coordinator[Coordinator Agent]
+![Sistem Mimarisi](screenshots/mimari.jpg)
 
-    Coordinator --> Emotion[Emotion Agent]
-    Coordinator --> Event[Event Agent]
-    Coordinator --> Context[Context Agent]
-    Coordinator --> Micro[MicroSignal Agent]
+Bu mimaride:
 
-    Emotion --> Affect[Affect Vector Agent]
-    Event --> Affect
-    Context --> Affect
-    Micro --> Affect
+- **Kullanıcı girdisi**, tüm süreci yöneten **CoordinatorAgent** tarafından alınır  
+- Duygu, olay, mikro sinyal ve bağlam bilgileri **bağımsız ajanlar** tarafından analiz edilir  
+- Bu çıktılar **Affect Vector Agent**’ta birleştirilerek 5 boyutlu duygusal durum vektörü oluşturulur  
+- **RegulationAgent**, mevcut durum ile hedef denge arasındaki farkı hesaplar  
+- **SpotifyAgent**, bu regülasyon hedefine uygun müzik önerisini üretir  
 
-    Affect --> Regulation[Regulation Agent]
-    Regulation --> Spotify[Spotify Agent]
-
-    Spotify --> Output[Müzik & Mikro Aktivite Önerisi]
-````
+Bu yapı sayesinde sistem:
+- Modüler  
+- Genişletilebilir  
+- Açıklanabilir (explainable AI)  
+bir karar akışına sahiptir.
 
 ---
 
@@ -92,7 +88,7 @@ graph TD
 | **WeatherAgent**      | Hava durumu verilerini (WeatherAPI) alarak çevresel bağlama ekler.                     |
 | **AffectVectorAgent** | Verileri 5 boyutlu duygu vektörüne (0–100) dönüştürür.                                 |
 | **RegulationAgent**   | Mevcut durum ile hedef denge arasındaki farkı hesaplar.                                |
-| **SpotifyAgent**      | Regülasyon hedefine uygun müzik ve mikro aktivite önerir.                              |
+| **SpotifyAgent**      | Regülasyon hedefine uygun müzik önerir.                              |
 
 ---
 
@@ -110,17 +106,74 @@ graph TD
 
 ## 📷 Ekran Görüntüleri
 
-### Ana Arayüz
+### 🖥️ 1) Ana Arayüz – Genel Akış
 
 ![Ana Arayüz](screenshots/main.png)
 
-### Müzik ve Mikro Aktivite Önerisi
+Bu ekran, uygulamanın **merkezi kontrol panelini** göstermektedir.
+
+**Bu ekranda:**
+- Kullanıcı duygu durumunu serbest metin olarak girer  
+- Günlük olay (event) ve mikro sinyal (yemek durumu) bilgileri eklenir  
+- Analiz başlatıldığında tüm ajanlar zincirleme şekilde çalışır  
+- Sağ panelde duygu durumu özeti ve grafik anlık güncellenir  
+
+---
+
+### 📈 2) Duygusal Durum Grafiği (5 Boyutlu)
+
+![Duygu Grafiği](screenshots/grafik.png)
+
+Bu grafik, kullanıcının duygusal durumunun **dengeye göre sapmasını** gösterir.
+
+**Önemli noktalar:**
+- Her eksen bir duygusal boyutu temsil eder  
+- **50 değeri denge noktasıdır**  
+- Görselleştirme için değerler `[-1, +1]` aralığına normalize edilmiştir  
+- Regülasyon öncesi durumun sezgisel olarak anlaşılmasını sağlar  
+
+---
+
+### 🎵 3) Müzik ve Mikro Aktivite Önerisi
 
 ![Müzik Önerisi](screenshots/music.png)
 
-### Karar İzleri ve Sistem Logları
+Analiz ve regülasyon sonucunda kullanıcıya:
 
-![Debug Paneli](screenshots/debug.png)
+- Spotify üzerinden önerilen müzik  
+- Küçük ama etkili bir **mikro aktivite** sunulur  
+
+Bu adım, duyguyu bastırmak yerine **nazikçe dengelemeyi** hedefler.
+
+---
+
+### 🧠 4) ⚠️ Yasal ve Etik Uyarı 
+
+![Analiz Detayı](screenshots/debug2.png)
+
+Bu uyarı, uygulamanın bir terapi veya teşhis aracı olmadığını,
+yalnızca duygusal dengeyi destekleyen öneriler sunduğunu
+kullanıcıya açıkça hatırlatmak amacıyla gösterilmektedir.
+
+---
+
+### 🧪 5) Karar İzleri – Kullanıcı Dostu Analiz Açıklaması
+
+![Teknik Debug](screenshots/debug1.png)
+
+Bu bölüm, sistemin **neden bu sonucu verdiğini** kullanıcıya açıklamak için tasarlanmıştır.
+
+**Adım adım şunlar gösterilir:**
+1. Nihai duygu sonucu  
+2. Olay (event) etkisinin değerlendirilmesi  
+3. Mikro sinyal (yemek) katkısı  
+4. Çevresel bağlam (şehir, hava, saat)  
+5. 5 müzik etmeninin nasıl hesaplandığı  
+6. Regülasyon kararlarının gerekçeleri  
+
+> 🎯 Amaç: “Bu müzik neden önerildi?” sorusuna şeffaf bir cevap vermek 
+
+Bu yapı, sistemin **açıklanabilir yapay zeka (Explainable AI)** yaklaşımını destekler.
 
 ---
 
